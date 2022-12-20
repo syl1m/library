@@ -15,7 +15,7 @@
     <header>
         <img src="./images/book_icon.svg" alt="Book logo"> library
     </header>
-    <div class="main_body">
+    <div class="table_container">
         <div class="book_list">
             <table>
                 <thead>
@@ -35,6 +35,28 @@
         <button><img src="./images/plus.svg" alt="plus icon"> Add Book</button>
     </div>
     <div class="empty_space"></div>
+    <div class="add_book_form">
+        <div class="form_title">Add New Book</div>
+        <form action="" method="post">
+            <div class="form_field">
+                <input type="text" name="title" placeholder="Title" required>
+            </div>
+            <div class="form_field">
+                <input type="text" name="author" placeholder="Author" required>
+            </div>
+            <div class="form_field">
+                <input type="number" name="pages" placeholder="Pages" required>
+            </div>
+            <div class="checkbox">
+                <label for="read_status">Have you read this book?</label>
+                <input type="checkbox" name="read" id="read_status" checked>
+            </div>
+            <div class="form_buttons">
+                <button type="reset">Cancel</button>
+                <button type="submit">Submit</button>
+            </div>
+        </form>
+    </div>
     <footer>Copyright © 2022 Sheng-Yau Lim</footer>
 </body>
 </html>
