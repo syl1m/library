@@ -1,4 +1,14 @@
 const libraryTableBody = document.querySelector('tbody');
+
+const bookForm = document.querySelector('.add_book_form');
+const titleFormValue = document.querySelector('input[name="title"]').value;
+const authorFormValue = document.querySelector('input[name="author"]').value;
+const pagesFormValue = document.querySelector('input[name="pages"]').value;
+
+const addBookBtn = document.querySelector('.add_book button');
+const cancelBtn = document.querySelector('button[type="reset"]');
+const submitBtn = document.querySelector('button[type="submit"]');
+
 let myLibrary = [];
 
 // Placeholder books
@@ -23,8 +33,25 @@ addBookToLibrary(book7);
 addBookToLibrary(book8);
 addBookToLibrary(book9);
 addBookToLibrary(book10);
-//
 
+displayBook()
+
+// Event Listeners
+addBookBtn.addEventListener('click', () => {
+    bookForm.style.display = "flex";
+});
+
+cancelBtn.addEventListener('click', () => {
+    bookForm.style.display = "none";
+});
+
+submitBtn.addEventListener('click', () => {
+    if (titleFormValue && authorFormValue && pagesFormValue) {
+        bookForm.style.display = "none";
+    }
+});
+
+// Functions
 function Book(title, author, pages, read) {
     this.title = title
     this.author = author
@@ -47,5 +74,3 @@ function displayBook() {
         libraryTableBody.appendChild(bookRow);
     }
 }
-
-displayBook()
