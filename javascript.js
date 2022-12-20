@@ -1,4 +1,5 @@
 const libraryTableBody = document.querySelector('tbody');
+const modalBackdrop = document.querySelector('.modal_backdrop');
 
 const bookForm = document.querySelector('.add_book_form');
 const titleFormValue = document.querySelector('input[name="title"]').value;
@@ -39,15 +40,18 @@ displayBook()
 // Event Listeners
 addBookBtn.addEventListener('click', () => {
     bookForm.style.display = "flex";
+    modalBackdrop.style.display = "block";
 });
 
 cancelBtn.addEventListener('click', () => {
     bookForm.style.display = "none";
+    modalBackdrop.style.display = "none";
 });
 
 submitBtn.addEventListener('click', () => {
     if (titleFormValue && authorFormValue && pagesFormValue) {
         bookForm.style.display = "none";
+        modalBackdrop.style.display = "none";
     }
 });
 
