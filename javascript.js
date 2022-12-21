@@ -49,7 +49,8 @@ cancelBtn.addEventListener('click', () => {
 
 submitBtn.addEventListener('click', (event) => {
     event.preventDefault();
-    
+    checkFormValidity();
+
     const titleFormValue = titleFormInput.value;
     const authorFormValue = authorFormInput.value;
     const pagesFormValue = pagesFormInput.value;
@@ -101,4 +102,10 @@ function getReadStatus(readFormValue) {
     } else {
         return ('Not Read');
     }
+}
+
+function checkFormValidity() {
+    pagesFormInput.reportValidity();
+    authorFormInput.reportValidity();
+    titleFormInput.reportValidity();
 }
