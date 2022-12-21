@@ -76,21 +76,25 @@ function Book(title, author, pages, read) {
 
 function addBookToLibrary(book) {
     myLibrary.push(book);
-    displayBook(book);
+    clearBookTable();
+    displayBook();
 }
 
-function displayBook(book) {
-    const bookRow = document.createElement('tr');
-    for(let prop in book) {
-        const bookInfoCell = document.createElement('td');
-        bookInfoCell.textContent = `${book[prop]}`;
-        bookRow.appendChild(bookInfoCell);
-    }
-    addRemoveIconToRow(bookRow);
-    libraryTableBody.appendChild(bookRow);
+function displayBook() {
+    for (let i = 0; i < myLibrary.length; i++) {
+        const bookRow = document.createElement('tr');
+        bookRow.dataset.index = i;
+        for(let prop in myLibrary[i]) {
+            const bookInfoCell = document.createElement('td');
+            bookInfoCell.textContent = `${myLibrary[i][prop]}`;
+            bookRow.appendChild(bookInfoCell);
+        }
+        addRemoveIconToRow(bookRow);
+        libraryTableBody.appendChild(bookRow);
 
-    const readStatusCell = bookRow.querySelectorAll('td')[3];
-    setReadStatusColor(readStatusCell);
+        const readStatusCell = bookRow.querySelectorAll('td')[3];
+        setReadStatusColor(readStatusCell);
+    }
 }
 
 function clearForm() {
@@ -130,4 +134,10 @@ function addRemoveIconToRow(bookRow) {
     removeIcon.src = "./images/remove_icon.svg";
     removeIconCell.appendChild(removeIcon);
     bookRow.appendChild(removeIconCell);
+}
+
+function clearBookTable() {
+    const tableBody = document.querySelector('tbody');
+    const bookBodyRows = tableBody.querySelectorAll('tr');
+    bookBodyRows.forEach(row => tableBody.removeChild(row));
 }
