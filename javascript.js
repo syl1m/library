@@ -87,6 +87,9 @@ function displayBook(book) {
         bookRow.appendChild(bookInfoCell);
     }
     libraryTableBody.appendChild(bookRow);
+
+    const readStatusCell = bookRow.querySelectorAll('td')[3];
+    setReadStatusColor(readStatusCell);
 }
 
 function clearForm() {
@@ -108,4 +111,12 @@ function checkFormValidity() {
     pagesFormInput.reportValidity();
     authorFormInput.reportValidity();
     titleFormInput.reportValidity();
+}
+
+function setReadStatusColor(readStatusCell) {
+    if (readStatusCell.textContent == "Read") {
+        readStatusCell.style.color = "var(--green)";
+    } else {
+        readStatusCell.style.color = "var(--red)";
+    }
 }
