@@ -86,6 +86,7 @@ function displayBook(book) {
         bookInfoCell.textContent = `${book[prop]}`;
         bookRow.appendChild(bookInfoCell);
     }
+    addRemoveIconToRow(bookRow);
     libraryTableBody.appendChild(bookRow);
 
     const readStatusCell = bookRow.querySelectorAll('td')[3];
@@ -119,4 +120,14 @@ function setReadStatusColor(readStatusCell) {
     } else {
         readStatusCell.style.color = "var(--red)";
     }
+}
+
+function addRemoveIconToRow(bookRow) {
+    const removeIconCell = document.createElement('td');
+    const removeIcon = document.createElement('img');
+    removeIconCell.classList.add('remove_icon_cell');
+    removeIcon.classList.add('remove_icon');
+    removeIcon.src = "./images/remove_icon.svg";
+    removeIconCell.appendChild(removeIcon);
+    bookRow.appendChild(removeIconCell);
 }
