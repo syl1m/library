@@ -11,6 +11,7 @@ const addBookBtn = document.querySelector('.add_book button');
 const cancelBtn = document.querySelector('button[type="reset"]');
 const submitBtn = document.querySelector('button[type="submit"]');
 
+let removeBookIcon = document.querySelectorAll('.remove_icon');
 let myLibrary = [];
 
 // Placeholder books
@@ -87,14 +88,16 @@ function displayBook() {
         for(let prop in myLibrary[i]) {
             const bookInfoCell = document.createElement('td');
             bookInfoCell.textContent = `${myLibrary[i][prop]}`;
+            bookInfoCell.dataset.index = i;
             bookRow.appendChild(bookInfoCell);
         }
-        addRemoveIconToRow(bookRow);
+        addRemoveIconToRow(bookRow, i);
         libraryTableBody.appendChild(bookRow);
 
         const readStatusCell = bookRow.querySelectorAll('td')[3];
         setReadStatusColor(readStatusCell);
     }
+    setRemoveIconEventListener();
 }
 
 function clearForm() {
@@ -126,7 +129,7 @@ function setReadStatusColor(readStatusCell) {
     }
 }
 
-function addRemoveIconToRow(bookRow) {
+function addRemoveIconToRow(bookRow, index) {
     const removeIconCell = document.createElement('td');
     const removeIcon = document.createElement('img');
     removeIconCell.classList.add('remove_icon_cell');
@@ -134,10 +137,23 @@ function addRemoveIconToRow(bookRow) {
     removeIcon.src = "./images/remove_icon.svg";
     removeIconCell.appendChild(removeIcon);
     bookRow.appendChild(removeIconCell);
+
+    removeIconCell.dataset.index = index;
+    removeIcon.dataset.index = index;
 }
 
 function clearBookTable() {
-    const tableBody = document.querySelector('tbody');
-    const bookBodyRows = tableBody.querySelectorAll('tr');
-    bookBodyRows.forEach(row => tableBody.removeChild(row));
+    libraryTableBody.textContent = "";
+}
+
+function removeBook(e) {
+    const index = e.target.dataset.index;
+    myLibrary.splice(index,1);
+    clearBookTable();
+    displayBook();
+}
+
+function setRemoveIconEventListener() {
+    removeBookIcon = document.querySelectorAll('.remove_icon');
+    removeBookIcon.forEach(icon => icon.addEventListener('click', removeBook));
 }
