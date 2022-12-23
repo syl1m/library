@@ -95,7 +95,8 @@ function displayBook() {
         libraryTableBody.appendChild(bookRow);
 
         const readStatusCell = bookRow.querySelectorAll('td')[3];
-        setReadStatusColor(readStatusCell);
+        const readStatusBtn = createStatusBtn(readStatusCell, i);
+        setReadStatusColor(readStatusBtn);
     }
     setRemoveIconEventListener();
 }
@@ -121,11 +122,11 @@ function checkFormValidity() {
     titleFormInput.reportValidity();
 }
 
-function setReadStatusColor(readStatusCell) {
-    if (readStatusCell.textContent == "Read") {
-        readStatusCell.style.color = "var(--green)";
+function setReadStatusColor(btn) {
+    if (btn.textContent == "Read") {
+        btn.style.backgroundColor = "var(--green)";
     } else {
-        readStatusCell.style.color = "var(--red)";
+        btn.style.backgroundColor = "var(--red)";
     }
 }
 
@@ -156,4 +157,16 @@ function removeBook(e) {
 function setRemoveIconEventListener() {
     removeBookIcon = document.querySelectorAll('.remove_icon');
     removeBookIcon.forEach(icon => icon.addEventListener('click', removeBook));
+}
+
+function createStatusBtn(readStatusCell, index) {
+    const readStatusValue = readStatusCell.textContent;
+    const readStatusBtn = document.createElement('button');
+    readStatusBtn.classList.add('readStatusBtn');
+    readStatusBtn.textContent = readStatusValue;
+    readStatusBtn.dataset.index = index;
+    readStatusCell.textContent = '';
+    readStatusCell.appendChild(readStatusBtn);
+
+    return readStatusBtn;
 }
