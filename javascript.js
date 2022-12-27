@@ -12,6 +12,7 @@ const cancelBtn = document.querySelector('button[type="reset"]');
 const submitBtn = document.querySelector('button[type="submit"]');
 
 let removeBookIcon = document.querySelectorAll('.remove_icon');
+let statusBtn = document.querySelectorAll('.readStatusBtn');
 let myLibrary = [];
 
 // Placeholder books
@@ -75,6 +76,18 @@ function Book(title, author, pages, read) {
     this.read = read
 }
 
+Book.prototype.toggleReadStatus = function() {
+    if (this.read === "Read") {
+        this.read = "Not Read";
+    } else {
+        this.read = "Read";
+    }
+}
+
+Object.defineProperty(Book.prototype, "toggleReadStatus", {
+    enumerable: false
+});
+
 function addBookToLibrary(book) {
     myLibrary.push(book);
     clearBookTable();
@@ -99,6 +112,7 @@ function displayBook() {
         setReadStatusColor(readStatusBtn);
     }
     setRemoveIconEventListener();
+    setReadStatusEventListener();
 }
 
 function clearForm() {
@@ -169,4 +183,16 @@ function createStatusBtn(readStatusCell, index) {
     readStatusCell.appendChild(readStatusBtn);
 
     return readStatusBtn;
+}
+
+function setReadStatusEventListener() {
+    statusBtn = document.querySelectorAll('.readStatusBtn');
+    statusBtn.forEach(btn => btn.addEventListener('click', changeReadStatus));
+}
+
+function changeReadStatus(e) {
+    const index = e.target.dataset.index;
+    myLibrary[index].toggleReadStatus();
+    clearBookTable();
+    displayBook();
 }
