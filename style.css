@@ -74,9 +74,23 @@ header img {
 
 footer {
     background-color: var(--dark-grey);
-    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
     padding: 15px;
     font-size: 0.9rem;
+}
+
+footer img {
+    width: 2rem;
+    transition-duration: 0.3s;
+    transition-timing-function: ease-out;
+}
+
+footer img:hover {
+    transform: rotate(360deg) scale(1.1);
+    filter: drop-shadow(0 0 0.3rem var(--purple-glow));
 }
 
 /* Table Styling */
